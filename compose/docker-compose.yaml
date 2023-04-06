@@ -23,5 +23,5 @@ volumes:
     driver: local                                                                                                                                                                                                   
     driver_opts:                                                                                                                                                                                                    
       type: nfs                                                                                                                                                                                                     
-      o: addr=172.16.5.30,rw                                                                                                                                                                                        
+      o: addr=172.16.5.30,rw,nocopy                                                                                                                                                                                        
       device: ":/volume1/ELASTIC/test/data01"
