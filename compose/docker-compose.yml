@@ -30,9 +30,6 @@ services:
         soft: -1
         hard: -1      
     deploy:
-      resources:
-        limits:
-          memory: 512M
       placement:
         constraints:
           - "node.hostname==testswac2w1"
