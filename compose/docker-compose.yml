@@ -7,7 +7,6 @@ services:
       - volume1:/usr/local/apache2/htdocs/:rw                                                                                                                                                                       
     ports:                                                                                                                                                                                                          
     - '8801:80'
-    env_file:
     deploy:
       placement:
         constraints:
