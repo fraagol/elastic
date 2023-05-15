@@ -23,6 +23,8 @@ services:
       - node.name=elastic_node_2
       - discovery.seed_hosts=testswac2w1
       - cluster.initial_master_nodes=testswac2w1
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     deploy:
       placement:
         constraints:
