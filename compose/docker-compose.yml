@@ -17,7 +17,8 @@ services:
     hostname: elastic2                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
     - '9200:9200'
-    env_file: common.env
+    env_file:
+    - common.env
     environment:
       - node.name=elastic_node_2
     deploy:
