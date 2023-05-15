@@ -17,6 +17,8 @@ services:
     hostname: elastic2                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
     - '9200:9200'
+    volumes:
+      - ./vol:/
     environment:
       - cluster.name=clustername
       - xpack.security.enabled=false
