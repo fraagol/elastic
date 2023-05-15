@@ -6,22 +6,37 @@ services:
     volumes:                                                                                                                                                                                                        
       - volume1:/usr/local/apache2/htdocs/:rw                                                                                                                                                                       
     ports:                                                                                                                                                                                                          
-    - '8801:80'                                                                                                                                                                                                     
-  apache2:                                                                                                                                                                                                          
-    image: httpd:latest                                                                                                                                                                                             
-    hostname: apache2                                                                                                                                                                                               
+    - '8801:80'
+    env_file:
+    deploy:
+      placement:
+        constraints:
+          - "node.hostname==testswac2w2"
+
+  elastic2:                                                                                                                                                                                                          
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
+    hostname: elastic2                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
-    - '8802:80'                                                                                                                                                                                                     
+    - '9200:9200'
+    deploy:
+      placement:
+        constraints:
+          - "node.hostname==testswac2w1"
+
   apache3:                                                                                                                                                                                                          
     image: httpd:latest                                                                                                                                                                                             
     hostname: apache3                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
-    - '8803:80'                                                                                                                                                                                                     
+    - '8803:80'
+    deploy:
+      placement:
+        constraints:
+          - "node.hostname==testswac2m1"                                                                                                                                                                                                  
                                                                                                                                                                                                                     
 volumes:                                                                                                                                                                                                            
   volume1:                                                                                                                                                                                                          
     driver: local                                                                                                                                                                                                   
     driver_opts:                                                                                                                                                                                                    
       type: nfs                                                                                                                                                                                                     
-      o: addr=172.16.5.30,rw,nocopy,no_root_squash                                                                                                                                                                                        
-      device: ":/volume1/ELASTIC/test/data01"
+      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none                                                                                                                                            
+      device: ":/volume1/ELASTIC/test/data01"                                  
