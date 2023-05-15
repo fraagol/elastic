@@ -21,6 +21,7 @@ services:
     - common.env
     environment:
       - node.name=elastic_node_2
+      - xpack.security.enabled=false
     deploy:
       placement:
         constraints:
