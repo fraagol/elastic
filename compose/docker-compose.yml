@@ -18,13 +18,9 @@ services:
     ports:                                                                                                                                                                                                          
     - '9200:9200'
     environment:
-      - node.name=elastic_node_2
-      - discovery.type=single-node
-      - cluster.name=clustername                                                                                                                                                                                                                                                                            
+      - cluster.name=clustername
       - xpack.security.enabled=false
-      - discovery.seed_hosts=testswac2w1
-      - cluster.initial_master_nodes=testswac2w1
-
+      - discovery.type= single-node
     deploy:
       placement:
         constraints:
