@@ -17,6 +17,10 @@ services:
     hostname: elastic2                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
     - '9200:9200'
+    environment:
+      - cluster.name=clustername
+      - xpack.security.enabled=false
+      - discovery.type= single-node
     deploy:
       placement:
         constraints:
