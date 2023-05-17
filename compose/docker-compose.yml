@@ -16,12 +16,13 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic2                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
-    - '9200:9200'
+    - 9200
+    - 9300
     environment:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_2
-      - discovery.seed_hosts=127.0.0.1
+      - discovery.seed_hosts=elastic2,elastic3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
@@ -33,16 +34,28 @@ services:
         constraints:
           - "node.hostname==testswac2w1"
 
-  apache3:                                                                                                                                                                                                          
-    image: httpd:latest                                                                                                                                                                                             
-    hostname: apache3                                                                                                                                                                                               
+elastic3:                                                                                                                                                                                                          
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
+    hostname: elastic3                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
-    - '8803:80'
+    - 9200
+    - 9300
+    environment:
+      - cluster.name=clustername
+      - xpack.security.enabled=false
+      - node.name=elastic_node_3
+      - discovery.seed_hosts=elastic2,elastic3
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1      
     deploy:
       placement:
         constraints:
-          - "node.hostname==testswac2m1"                                                                                                                                                                                                  
-                                                                                                                                                                                                                    
+          - "node.hostname==testswac2w2"
+                                                                                                                                                            
 volumes:                                                                                                                                                                                                            
   volume1:                                                                                                                                                                                                          
     driver: local                                                                                                                                                                                                   
