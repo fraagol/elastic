@@ -34,7 +34,7 @@ services:
         constraints:
           - "node.hostname==testswac2w1"
 
-elastic3:                                                                                                                                                                                                          
+  elastic3:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic3                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
