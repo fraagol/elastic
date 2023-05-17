@@ -16,8 +16,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic2                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
-    - 9200
-    - 9300
+    - "9200:9200"
+    - "9300:9300"
     environment:
       - cluster.name=clustername
       - xpack.security.enabled=false
@@ -39,14 +39,14 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic3                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
-    - 9200
-    - 9300
+    - "9200:9200"
+    - "9300:9300"
     environment:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_3
       - discovery.seed_hosts=elastic2,elastic3
-      - cluster.initial_master_nodes=elastic2
+      - cluster.initial_master_nodes=elastic2,elastic_node_2
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
