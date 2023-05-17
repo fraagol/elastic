@@ -21,6 +21,7 @@ services:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_2
+      - discovery.seed_hosts=127.0.0.1
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
