@@ -26,6 +26,7 @@ services:
       - cluster.initial_master_nodes=elastic_node_2
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - network.host=0.0.0.0
     ulimits:
       memlock:
         soft: -1
@@ -49,6 +50,7 @@ services:
       - cluster.initial_master_nodes=elastic2,elastic_node_2
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - network.host=0.0.0.0
     ulimits:
       memlock:
         soft: -1
