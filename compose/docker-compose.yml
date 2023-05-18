@@ -19,7 +19,7 @@ services:
     environment:
       - PSWD=123456
     networks:
-      - my-network
+      - elastic-service-network
     deploy:
       placement:
         constraints:
@@ -28,9 +28,13 @@ services:
   elastic_node_1:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic_node_1                                                                                                                                                                                               
-    # ports:                                                                                                                                                                                                          
-    # - "9201:9200"
-    # - "9301:9300"
+    ports:
+      - target: 9200
+        published: 9200
+        mode: host
+      - target: 9300
+        published: 9300
+        mode: host
     environment:
       - cluster.name=clustername
       - xpack.security.enabled=false
@@ -50,13 +54,17 @@ services:
         constraints:
           - "node.hostname==testswac2m1"
     networks:
-      - my-network
+      - elastic-service-network
   elastic_node_2:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic_node_2                                                                                                                                                                                               
-    # ports:                                                                                                                                                                                                          
-    # - "9202:9200"
-    # - "9302:9300"
+    ports:
+      - target: 9200
+        published: 9200
+        mode: host
+      - target: 9300
+        published: 9300
+        mode: host
     environment:
       - cluster.name=clustername
       - xpack.security.enabled=false
@@ -76,13 +84,17 @@ services:
         constraints:
           - "node.hostname==testswac2w1"
     networks:
-      - my-network
+      - elastic-service-network      
   elastic_node_3:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic_node_3                                                                                                                                                                                               
-    # ports:                                                                                                                                                                                                          
-    # - "9203:9200"
-    # - "9303:9300"
+    ports:
+      - target: 9200
+        published: 9200
+        mode: host
+      - target: 9300
+        published: 9300
+        mode: host
     environment:
       - cluster.name=clustername
       - xpack.security.enabled=false
@@ -102,10 +114,10 @@ services:
         constraints:
           - "node.hostname==testswac2w2"
     networks:
-      - my-network
-# networks:
-#   elastic-service-network:
-#     name: elastic-service-network
+      - elastic-service-network
+networks:
+  elastic-service-network:
+    name: elastic-service-network
                                                                                                                                                             
 volumes:                                                                                                                                                                                                            
   volume1:                                                                                                                                                                                                          
