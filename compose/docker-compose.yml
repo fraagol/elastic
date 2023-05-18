@@ -24,6 +24,7 @@ services:
       placement:
         constraints:
           - "node.hostname==testswac2m1"  
+          
   elastic_node_1:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic_node_1                                                                                                                                                                                               
@@ -38,7 +39,7 @@ services:
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - network.host=_eth0_
+      # - network.host=_eth0_
       - transport.port=9301
     ulimits:
       memlock:
@@ -64,7 +65,7 @@ services:
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - network.host=_eth0_
+      # - network.host=_eth0_
       - transport.port=9302      
     ulimits:
       memlock:
@@ -90,7 +91,7 @@ services:
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - network.host=_eth0_
+      # - network.host=_eth0_
       - transport.port=9303      
     ulimits:
       memlock:
