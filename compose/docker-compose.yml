@@ -12,6 +12,31 @@ services:
   #       constraints:
   #         - "node.hostname==testswac2w2"
 
+  elastic_node_1:                                                                                                                                                                                                          
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
+    hostname: elastic_node_1                                                                                                                                                                                               
+    ports:                                                                                                                                                                                                          
+    - "9201:9200"
+    - "9301:9300"
+    environment:
+      - cluster.name=clustername
+      - xpack.security.enabled=false
+      - node.name=elastic_node_1
+      - discovery.seed_hosts=elastic_node_2,elastic_node_3
+      - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - network.host=0.0.0.0
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1      
+    deploy:
+      placement:
+        constraints:
+          - "node.hostname==testswac2m1"
+    networks:
+      - elastic-service-network
   elastic_node_2:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic_node_2                                                                                                                                                                                               
@@ -22,8 +47,8 @@ services:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_2
-      - discovery.seed_hosts=elastic_node_3
-      - cluster.initial_master_nodes=elastic_node_2,elastic_node_3
+      - discovery.seed_hosts=elastic_node_1,elastic_node_3
+      - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - network.host=0.0.0.0
@@ -36,7 +61,7 @@ services:
         constraints:
           - "node.hostname==testswac2w1"
     networks:
-      - elastic-service-network
+      - elastic-service-network      
   elastic_node_3:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic_node_3                                                                                                                                                                                               
@@ -47,8 +72,8 @@ services:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_3
-      - discovery.seed_hosts=elastic_node_2
-      - cluster.initial_master_nodes=elastic_node_2,elastic_node_3
+      - discovery.seed_hosts=elastic_node_1,elastic_node_2
+      - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - network.host=0.0.0.0
