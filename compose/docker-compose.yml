@@ -73,6 +73,8 @@ services:
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - network.host=0.0.0.0
+
       # - network.host=_eth0_
       # - transport.port=9302      
     ulimits:
@@ -103,6 +105,7 @@ services:
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - network.host=0.0.0.0
       # - network.host=_eth0_
       # - transport.port=9303      
     ulimits:
