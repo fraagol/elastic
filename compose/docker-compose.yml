@@ -12,14 +12,18 @@ services:
   #       constraints:
   #         - "node.hostname==testswac2w2"
 
-  # box:
-  #   image: devdotnetorg/alpine-ssh
-  #   ports: 
-  #     - "2222:22"
-  #   environment:
-  #     - PSWD=123456
-  #   networks:
-  #     - elastic-service-network
+  box:
+    image: devdotnetorg/alpine-ssh
+    ports: 
+      - "2222:22"
+    environment:
+      - PSWD=123456
+    networks:
+      - elastic-service-network
+    deploy:
+      placement:
+        constraints:
+          - "node.hostname==testswac2m1"  
   elastic_node_1:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic_node_1                                                                                                                                                                                               
