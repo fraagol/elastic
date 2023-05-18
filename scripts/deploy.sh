@@ -1,5 +1,7 @@
 #!/bin/bash
 echo
+echo git pull
+echo
 echo docker stack rm volume-test
 docker stack rm volume-test
 sleep 1
