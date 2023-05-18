@@ -40,7 +40,7 @@ services:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       # - network.host=_eth0_
-      - transport.port=9301
+      # - transport.port=9301
     ulimits:
       memlock:
         soft: -1
@@ -66,7 +66,7 @@ services:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       # - network.host=_eth0_
-      - transport.port=9302      
+      # - transport.port=9302      
     ulimits:
       memlock:
         soft: -1
@@ -92,7 +92,7 @@ services:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       # - network.host=_eth0_
-      - transport.port=9303      
+      # - transport.port=9303      
     ulimits:
       memlock:
         soft: -1
