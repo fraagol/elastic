@@ -19,7 +19,7 @@ services:
     environment:
       - PSWD=123456
     networks:
-      - elastic-service-network
+      - my-network
     deploy:
       placement:
         constraints:
@@ -50,7 +50,7 @@ services:
         constraints:
           - "node.hostname==testswac2m1"
     networks:
-      - elastic-service-network
+      - my-network
   elastic_node_2:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic_node_2                                                                                                                                                                                               
@@ -76,7 +76,7 @@ services:
         constraints:
           - "node.hostname==testswac2w1"
     networks:
-      - elastic-service-network      
+      - my-network
   elastic_node_3:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
     hostname: elastic_node_3                                                                                                                                                                                               
@@ -102,10 +102,10 @@ services:
         constraints:
           - "node.hostname==testswac2w2"
     networks:
-      - elastic-service-network
-networks:
-  elastic-service-network:
-    name: elastic-service-network
+      - my-network
+# networks:
+#   elastic-service-network:
+#     name: elastic-service-network
                                                                                                                                                             
 volumes:                                                                                                                                                                                                            
   volume1:                                                                                                                                                                                                          
