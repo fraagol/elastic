@@ -14,7 +14,7 @@ services:
 
   box:
     image: devdotnetorg/alpine-ssh
-    port: "2222:22"
+    ports: "2222:22"
     environment:
       - PSWD=123456
     networks:
