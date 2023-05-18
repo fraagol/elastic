@@ -14,7 +14,7 @@ services:
 
   elastic_node_2:                                                                                                                                                                                                          
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
-    hostname: elastic_node_3¡2                                                                                                                                                                                               
+    hostname: elastic_node_2                                                                                                                                                                                               
     ports:                                                                                                                                                                                                          
     - "9202:9200"
     - "9302:9300"
