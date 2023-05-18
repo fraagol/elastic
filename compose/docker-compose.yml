@@ -42,7 +42,7 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.hostname==testswac2w1"
+          - "node.hostname==testswac2m1"
     networks:
       - elastic-service-network
   elastic_node_2:                                                                                                                                                                                                          
@@ -92,7 +92,7 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.hostname==testswac2w1"
+          - "node.hostname==testswac2w2"
     networks:
       - elastic-service-network
 networks:
