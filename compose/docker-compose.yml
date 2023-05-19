@@ -29,7 +29,7 @@ services:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - network.host=0.0.0.0
-      # - network.publish_host= _eth0_
+      - network.publish_host=elastic_node_1
       # - network.host=_eth0_
       # - transport.port=9301
     ulimits:
@@ -60,7 +60,7 @@ services:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - network.host=0.0.0.0
-      # - network.publish_host= _eth0_
+      - network.publish_host=elastic_node_2
       # - network.host=_eth0_
       # - transport.port=9302
     ulimits:
@@ -91,7 +91,7 @@ services:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - network.host=0.0.0.0
-      # - network.publish_host= _eth0_
+      - network.publish_host=elastic_node_3
       # - network.host=_eth0_
       # - transport.port=9303
     ulimits:
