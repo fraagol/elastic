@@ -115,9 +115,9 @@ services:
   #       constraints:
   #         - "node.hostname==testswac2w2"
 
-# networks:
-#   elastic-service-network:
-#     name: elastic-service-network
+networks:
+  elastic-service-network:
+    name: elastic-service-network
 
 volumes:
   volume1:
