@@ -17,14 +17,15 @@ services:
   elastic_node_1:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
     hostname: elastic_node_1
-    ports:
-      - "9201:9200"
-      - "9301:9300"
+    # ports:
+    #   - "9201:9200"
+    #   - "9301:9300"
     environment:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_1
-      - discovery.seed_hosts=elastic_node_2:9300,elastic_node_3:9300
+      # - discovery.seed_hosts=elastic_node_2:9300,elastic_node_3:9300
+      - discovery.seed_hosts=elastic_node_1,elastic_node_2,elastic_node_3
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -48,14 +49,15 @@ services:
   elastic_node_2:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
     hostname: elastic_node_2
-    ports:
-      - "9202:9200"
-      - "9302:9300"
+    # ports:
+    #   - "9202:9200"
+    #   - "9302:9300"
     environment:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_2
-      - discovery.seed_hosts=elastic_node_1:9300,elastic_node_3:9300
+      # - discovery.seed_hosts=elastic_node_1:9300,elastic_node_3:9300
+      - discovery.seed_hosts=elastic_node_1,elastic_node_2,elastic_node_3
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -79,14 +81,15 @@ services:
   elastic_node_3:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
     hostname: elastic_node_3
-    ports:
-      - "9203:9200"
-      - "9303:9300"
+    # ports:
+    #   - "9203:9200"
+    #   - "9303:9300"
     environment:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_3
-      - discovery.seed_hosts=elastic_node_1:9300,elastic_node_2:9300
+      # - discovery.seed_hosts=elastic_node_1:9300,elastic_node_2:9300
+      - discovery.seed_hosts=elastic_node_1,elastic_node_2,elastic_node_3      
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
