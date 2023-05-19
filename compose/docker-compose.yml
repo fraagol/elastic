@@ -1,10 +1,9 @@
-version: '3.9'                                                                                                                                                                                                      
-services:                                                                                                                                                                                                           
-
+version: '3.9'
+services:
 
   box:
     image: devdotnetorg/alpine-ssh
-    ports: 
+    ports:
       - "2222:22"
     environment:
       - PSWD=123456
@@ -13,11 +12,12 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.hostname==testswac2m1"  
+          - "node.hostname==testswac2m1"
 
-  elastic_node_1:                                                                                                                                                                                                          
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
-    hostname: elastic_node_1                                                                                                                                                                                               
+  elastic_node_1:
+    # image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    hostname: elastic_node_1
     ports:
       - "9201:9200"
       - "9301:9300"
@@ -25,27 +25,29 @@ services:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_1
-      - discovery.seed_hosts=elastic_node_2:9302,elastic_node_3:9303
+      - discovery.seed_hosts=elastic_node_2:9300,elastic_node_3:9300
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      # - network.host=0.0.0.0
-      - network.publish_host= _eth1_
-      - network.host=_eth1_
+      - network.host=0.0.0.0
+      # - network.publish_host= _eth1_
+      # - network.host=_eth1_
       # - transport.port=9301
     ulimits:
       memlock:
         soft: -1
-        hard: -1      
+        hard: -1
     deploy:
       placement:
         constraints:
           - "node.hostname==testswac2m1"
     networks:
       - elastic-service-network
-  elastic_node_2:                                                                                                                                                                                                          
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
-    hostname: elastic_node_2                                                                                                                                                                                               
+
+  elastic_node_2:
+    # image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    hostname: elastic_node_2
     ports:
       - "9202:9200"
       - "9302:9300"
@@ -53,27 +55,28 @@ services:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_2
-      - discovery.seed_hosts=elastic_node_1:9301,elastic_node_3:9303
+      - discovery.seed_hosts=elastic_node_1:9300,elastic_node_3:9300
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      # - network.host=0.0.0.0
-      - network.publish_host= _eth1_
-      - network.host=_eth1_
-      # - transport.port=9302      
+      - network.host=0.0.0.0
+      # - network.publish_host= _eth1_
+      # - network.host=_eth1_
+      # - transport.port=9302
     ulimits:
       memlock:
         soft: -1
-        hard: -1      
+        hard: -1
     deploy:
       placement:
         constraints:
           - "node.hostname==testswac2w1"
     networks:
-      - elastic-service-network      
-  elastic_node_3:                                                                                                                                                                                                          
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1                                                                                                                                                                                             
-    hostname: elastic_node_3                                                                                                                                                                                               
+      - elastic-service-network
+  elastic_node_3:
+    # image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    hostname: elastic_node_3
     ports:
       - "9203:9200"
       - "9303:9300"
@@ -81,18 +84,18 @@ services:
       - cluster.name=clustername
       - xpack.security.enabled=false
       - node.name=elastic_node_3
-      - discovery.seed_hosts=elastic_node_1:9301,elastic_node_2:9302
+      - discovery.seed_hosts=elastic_node_1:9300,elastic_node_2:9300
       - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      # - network.host=0.0.0.0
-      - network.publish_host= _eth1_
-      - network.host=_eth1_
-      # - transport.port=9303      
+      - network.host=0.0.0.0
+      # - network.publish_host= _eth1_
+      # - network.host=_eth1_
+      # - transport.port=9303
     ulimits:
       memlock:
         soft: -1
-        hard: -1      
+        hard: -1
     deploy:
       placement:
         constraints:
@@ -100,12 +103,12 @@ services:
     networks:
       - elastic-service-network
 
-# apache1:                                                                                                                                                                                                          
-  #   image: httpd:latest                                                                                                                                                                                             
-  #   hostname: apache1                                                                                                                                                                                               
-  #   volumes:                                                                                                                                                                                                        
-  #     - volume1:/usr/local/apache2/htdocs/:rw                                                                                                                                                                       
-  #   ports:                                                                                                                                                                                                          
+# apache1:
+  #   image: httpd:latest
+  #   hostname: apache1
+  #   volumes:
+  #     - volume1:/usr/local/apache2/htdocs/:rw
+  #   ports:
   #   - '8801:80'
   #   deploy:
   #     placement:
@@ -115,11 +118,11 @@ services:
 # networks:
 #   elastic-service-network:
 #     name: elastic-service-network
-                                                                                                                                                            
-volumes:                                                                                                                                                                                                            
-  volume1:                                                                                                                                                                                                          
-    driver: local                                                                                                                                                                                                   
-    driver_opts:                                                                                                                                                                                                    
-      type: nfs                                                                                                                                                                                                     
-      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none                                                                                                                                            
-      device: ":/volume1/ELASTIC/test/data01"                                  
+
+volumes:
+  volume1:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
+      device: ":/volume1/ELASTIC/test/data01"
