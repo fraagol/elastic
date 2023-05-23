@@ -9,6 +9,8 @@ services:
       - PSWD=123456
     networks:
       - elastic-service-network
+    volumes:
+      - volume1:/root/test/:rw      
     deploy:
       placement:
         constraints:
