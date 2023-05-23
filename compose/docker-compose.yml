@@ -12,7 +12,7 @@ services:
     volumes:
       - volume1:/root/vol1/:rw
       - volume2:/root/vol2/:rw
-      - volume1:/root/vol3/:rw
+      - volume3:/root/vol3/:rw
       
     deploy:
       placement:
@@ -145,7 +145,7 @@ volumes:
       type: nfs
       o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
       device: ":/volume1/ELASTIC/test/data02"
-  volume1:
+  volume3:
     driver: local
     driver_opts:
       type: nfs
