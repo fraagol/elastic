@@ -46,7 +46,7 @@ services:
         constraints:
           - "node.hostname==testswac2m1"
     networks:
-      elastic-service-network:
+      elastic-network:
         aliases:
           - elastic_node_1
 
@@ -78,7 +78,7 @@ services:
         constraints:
           - "node.hostname==testswac2w1"
     networks:
-      elastic-service-network:
+      elastic-network:
         aliases:
           - elastic_node_2
 
@@ -110,7 +110,7 @@ services:
         constraints:
           - "node.hostname==testswac2w2"
     networks:
-      elastic-service-network:
+      elastic-network:
         aliases:
           - elastic_node_3
 
@@ -127,8 +127,8 @@ services:
   #         - "node.hostname==testswac2w2"
 
 networks:
-  elastic-service-network:
-    name: elastic-service-network
+  elastic-network:
+    name: elastic-network
     attachable: true
 
 # volumes:
