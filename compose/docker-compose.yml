@@ -1,6 +1,5 @@
 version: '3.9'
 services:
-
   box:
     image: devdotnetorg/alpine-ssh
     ports:
@@ -9,10 +8,10 @@ services:
       - PSWD=123456
     networks:
       - elastic-service-network
-    volumes:
-      - volume1:/root/a/:rw
-      - volume2:/root/b/:rw
-      - volume3:/root/c/:rw
+    # volumes:
+    #   - volume1:/root/a/:rw
+    #   - volume2:/root/b/:rw
+    #   - volume3:/root/c/:rw
       
     deploy:
       placement:
@@ -132,22 +131,22 @@ networks:
     name: elastic-service-network
     attachable: true
 
-volumes:
-  volume1:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
-      device: ":/volume1/ELASTIC/test/data01"
-  volume2:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
-      device: ":/volume1/ELASTIC/test/data02"
-  volume3:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
-      device: ":/volume1/ELASTIC/test/data03"      
+# volumes:
+#   volume1:
+#     driver: local
+#     driver_opts:
+#       type: nfs
+#       o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
+#       device: ":/volume1/ELASTIC/test/data01"
+#   volume2:
+#     driver: local
+#     driver_opts:
+#       type: nfs
+#       o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
+#       device: ":/volume1/ELASTIC/test/data02"
+#   volume3:
+#     driver: local
+#     driver_opts:
+#       type: nfs
+#       o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
+#       device: ":/volume1/ELASTIC/test/data03"      
