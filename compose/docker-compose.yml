@@ -1,22 +1,22 @@
 version: '3.9'
 services:
-  box:
-    image: devdotnetorg/alpine-ssh
-    ports:
-      - "2222:22"
-    environment:
-      - PSWD=123456
-    networks:
-      - elastic-network
-    volumes:
-      - volume1:/root/a/:r
-    #   - volume2:/root/b/:rw
-    #   - volume3:/root/c/:rw
+  # box:
+  #   image: devdotnetorg/alpine-ssh
+  #   ports:
+  #     - "2222:22"
+  #   environment:
+  #     - PSWD=123456
+  #   networks:
+  #     - elastic-network
+  #   volumes:
+  #     - volume1:/root/a/:r
+  #   #   - volume2:/root/b/:rw
+  #   #   - volume3:/root/c/:rw
       
-    deploy:
-      placement:
-        constraints:
-          - "node.hostname==testswac2m1"
+  #   deploy:
+  #     placement:
+  #       constraints:
+  #         - "node.hostname==testswac2m1"
 
   elastic_node_1:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
@@ -79,6 +79,8 @@ services:
       placement:
         constraints:
           - "node.hostname==testswac2w1"
+    volumes:
+    - volume2:/usr/share/elasticsearch/data:rw    
     networks:
       elastic-network:
         aliases:
@@ -111,6 +113,8 @@ services:
       placement:
         constraints:
           - "node.hostname==testswac2w2"
+    volumes:
+    - volume3:/usr/share/elasticsearch/data:rw    
     networks:
       elastic-network:
         aliases:
@@ -143,15 +147,15 @@ volumes:
       type: nfs
       o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
       device: ":/volume1/ELASTIC/test/data01"
-  # volume2:
-  #   driver: local
-  #   driver_opts:
-  #     type: nfs
-  #     o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
-  #     device: ":/volume1/ELASTIC/test/data02"
-  # volume3:
-  #   driver: local
-  #   driver_opts:
-  #     type: nfs
-  #     o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
-  #     device: ":/volume1/ELASTIC/test/data03"      
+  volume2:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
+      device: ":/volume1/ELASTIC/test/data02"
+  volume3:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
+      device: ":/volume1/ELASTIC/test/data03"      
