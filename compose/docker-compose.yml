@@ -130,8 +130,9 @@ networks:
   elastic-network:
     name: elastic-network
     attachable: true
-    config:
-      - subnet: 10.1.99.0/24
+    ipam: 
+      config:
+        - subnet: 10.1.99.0/24
 
 # volumes:
 #   volume1:
