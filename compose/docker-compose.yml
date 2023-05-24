@@ -2,8 +2,8 @@ version: '3.9'
 services:
   box:
     image: devdotnetorg/alpine-ssh
-    # ports:
-      # - "2222:22"
+    ports:
+      - "2222:22"
     environment:
       - PSWD=123456
     networks:
@@ -130,6 +130,8 @@ networks:
   elastic-network:
     name: elastic-network
     attachable: true
+    config:
+      - subnet: 10.1.99.0/24
 
 # volumes:
 #   volume1:
