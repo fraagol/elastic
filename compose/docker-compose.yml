@@ -10,9 +10,9 @@ services:
     networks:
       - elastic-service-network
     volumes:
-      - volume_1:/root/a/:rw
-      - volume_2:/root/b/:rw
-      - volume_3:/root/c/:rw
+      - volume1:/root/a/:rw
+      - volume2:/root/b/:rw
+      - volume3:/root/c/:rw
       
     deploy:
       placement:
