@@ -46,7 +46,7 @@ services:
         constraints:
           - "node.hostname==testswac2m1"
     volumes:
-    - volume_1:/usr/share/elasticsearch/data:rw
+    - volume_2:/usr/share/elasticsearch/data:rw
     networks:
       elastic-network:
         aliases:
@@ -80,7 +80,7 @@ services:
         constraints:
           - "node.hostname==testswac2w1"
     volumes:
-    - volume_2:/usr/share/elasticsearch/data:rw    
+    - volume_1:/usr/share/elasticsearch/data:rw    
     networks:
       elastic-network:
         aliases:
