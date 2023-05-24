@@ -28,9 +28,8 @@ services:
       - cluster.name=elastic_cluster
       - xpack.security.enabled=false
       - node.name=elastic_node_1
-      # - discovery.seed_hosts=elastic_node_2:9300,elastic_node_3:9300
       - discovery.seed_hosts=elastic_node_1,elastic_node_2,elastic_node_3
-      - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
+      # - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - network.host=0.0.0.0
@@ -62,9 +61,8 @@ services:
       - cluster.name=elastic_cluster
       - xpack.security.enabled=false
       - node.name=elastic_node_2
-      # - discovery.seed_hosts=elastic_node_1:9300,elastic_node_3:9300
       - discovery.seed_hosts=elastic_node_1,elastic_node_2,elastic_node_3
-      - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
+      # - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - network.host=0.0.0.0
@@ -78,7 +76,7 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.hostname==testswac2m1"
+          - "node.hostname==testswac2w1"
     volumes:
     - volume_2:/usr/share/elasticsearch/data:rw    
     networks:
@@ -96,9 +94,8 @@ services:
       - cluster.name=elastic_cluster
       - xpack.security.enabled=false
       - node.name=elastic_node_3
-      # - discovery.seed_hosts=elastic_node_1:9300,elastic_node_2:9300
       - discovery.seed_hosts=elastic_node_1,elastic_node_2,elastic_node_3      
-      - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
+      # - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - network.host=0.0.0.0
