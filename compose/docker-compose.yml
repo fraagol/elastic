@@ -25,7 +25,7 @@ services:
     #   - "9201:9200"
     #   - "9301:9300"
     environment:
-      - cluster.name=clustername
+      - cluster.name=elastic_cluster
       - xpack.security.enabled=false
       - node.name=elastic_node_1
       # - discovery.seed_hosts=elastic_node_2:9300,elastic_node_3:9300
@@ -59,7 +59,7 @@ services:
     #   - "9202:9200"
     #   - "9302:9300"
     environment:
-      - cluster.name=clustername
+      - cluster.name=elastic_cluster
       - xpack.security.enabled=false
       - node.name=elastic_node_2
       # - discovery.seed_hosts=elastic_node_1:9300,elastic_node_3:9300
@@ -91,7 +91,7 @@ services:
     #   - "9203:9200"
     #   - "9303:9300"
     environment:
-      - cluster.name=clustername
+      - cluster.name=elastic_cluster
       - xpack.security.enabled=false
       - node.name=elastic_node_3
       # - discovery.seed_hosts=elastic_node_1:9300,elastic_node_2:9300
