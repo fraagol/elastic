@@ -114,17 +114,17 @@ services:
         aliases:
           - elastic_node_3
 
-apache1:
-    image: httpd:latest
-    hostname: apache1
-    volumes:
-      - volume1:/usr/local/apache2/htdocs/:rw
-    ports:
-    - '8801:80'
-    deploy:
-      placement:
-        constraints:
-          - "node.hostname==testswac2w2"
+# apache1:
+#     image: httpd:latest
+#     hostname: apache1
+#     volumes:
+#       - volume1:/usr/local/apache2/htdocs/:rw
+#     ports:
+#     - '8801:80'
+#     deploy:
+#       placement:
+#         constraints:
+#           - "node.hostname==testswac2w2"
 
 networks:
   elastic-network:
