@@ -10,8 +10,8 @@ services:
   #     - elastic-network
   #   volumes:
   #     - volume1:/root/a/:r
-  #   #   - volume2:/root/b/:rw
-  #   #   - volume3:/root/c/:rw
+  #   #   - volume_2:/root/b/:rw
+  #   #   - volume_3:/root/c/:rw
       
   #   deploy:
   #     placement:
@@ -46,7 +46,7 @@ services:
         constraints:
           - "node.hostname==testswac2m1"
     volumes:
-    - volume1:/usr/share/elasticsearch/data:rw
+    - volume_1:/usr/share/elasticsearch/data:rw
     networks:
       elastic-network:
         aliases:
@@ -80,7 +80,7 @@ services:
         constraints:
           - "node.hostname==testswac2w1"
     volumes:
-    - volume2:/usr/share/elasticsearch/data:rw    
+    - volume_2:/usr/share/elasticsearch/data:rw    
     networks:
       elastic-network:
         aliases:
@@ -114,23 +114,11 @@ services:
         constraints:
           - "node.hostname==testswac2w2"
     volumes:
-    - volume3:/usr/share/elasticsearch/data:rw    
+    - volume_3:/usr/share/elasticsearch/data:rw    
     networks:
       elastic-network:
         aliases:
           - elastic_node_3
-
-# apache1:
-#     image: httpd:latest
-#     hostname: apache1
-#     volumes:
-#       - volume1:/usr/local/apache2/htdocs/:rw
-#     ports:
-#     - '8801:80'
-#     deploy:
-#       placement:
-#         constraints:
-#           - "node.hostname==testswac2w2"
 
 networks:
   elastic-network:
@@ -141,19 +129,19 @@ networks:
         - subnet: 10.1.99.0/24
 
 volumes:
-  volume1:
+  volume_1:
     driver: local
     driver_opts:
       type: nfs
       o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
       device: ":/volume1/ELASTIC/test/data01"
-  volume2:
+  volume_2:
     driver: local
     driver_opts:
       type: nfs
       o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
       device: ":/volume1/ELASTIC/test/data02"
-  volume3:
+  volume_3:
     driver: local
     driver_opts:
       type: nfs
