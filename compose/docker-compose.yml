@@ -60,6 +60,8 @@ services:
     # ports:
     #   - "9202:9200"
     #   - "9302:9300"
+    env_file:
+      - ./common.env
     environment:
       - node.name=elastic_node_2
       # - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
@@ -86,6 +88,8 @@ services:
     # ports:
     #   - "9203:9200"
     #   - "9303:9300"
+    env_file:
+      - ./common.env
     environment:
       - node.name=elastic_node_3
       # - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
