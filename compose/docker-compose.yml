@@ -33,8 +33,10 @@ services:
     # ports:
     #   - "9201:9200"
     #   - "9301:9300"
+    env_file:
+      - ./common.env
     environment:
-      - cluster.name=elastic_cluster
+      #- cluster.name=elastic_cluster
       - xpack.security.enabled=false
       - node.name=elastic_node_1
       - discovery.seed_hosts=elastic_node_1,elastic_node_2,elastic_node_3
