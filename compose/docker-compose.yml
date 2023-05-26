@@ -18,6 +18,15 @@ services:
   #       constraints:
   #         - "node.hostname==testswac2m1"
 
+  apache1:
+    image: httpd:latest
+    hostname: apache1
+    ports:
+    - '8888:80'
+    deploy:
+      placement:
+        constraints:
+          - "node.hostname==testswac2m1"
   elastic_node_1:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
     hostname: elastic_node_1
