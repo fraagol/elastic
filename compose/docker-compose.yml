@@ -36,17 +36,9 @@ services:
     env_file:
       - ./common.env
     environment:
-      #- cluster.name=elastic_cluster
-      - xpack.security.enabled=false
       - node.name=elastic_node_1
-      - discovery.seed_hosts=elastic_node_1,elastic_node_2,elastic_node_3
       # - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - network.host=0.0.0.0
-      - network.publish_host=elastic_node_1
       # - network.host=_eth0_
-      # - transport.port=9301
     ulimits:
       memlock:
         soft: -1
@@ -69,17 +61,10 @@ services:
     #   - "9202:9200"
     #   - "9302:9300"
     environment:
-      - cluster.name=elastic_cluster
-      - xpack.security.enabled=false
       - node.name=elastic_node_2
-      - discovery.seed_hosts=elastic_node_1,elastic_node_2,elastic_node_3
       # - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - network.host=0.0.0.0
-      - network.publish_host=elastic_node_2
       # - network.host=_eth0_
-      # - transport.port=9302
+
     ulimits:
       memlock:
         soft: -1
@@ -102,15 +87,8 @@ services:
     #   - "9203:9200"
     #   - "9303:9300"
     environment:
-      - cluster.name=elastic_cluster
-      - xpack.security.enabled=false
       - node.name=elastic_node_3
-      - discovery.seed_hosts=elastic_node_1,elastic_node_2,elastic_node_3      
       # - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - network.host=0.0.0.0
-      - network.publish_host=elastic_node_3
       # - network.host=_eth0_
       # - transport.port=9303
     ulimits:
