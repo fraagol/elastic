@@ -49,6 +49,7 @@ services:
           - "node.hostname==testswac2m1"
     volumes:
     - volume_1:/usr/share/elasticsearch/data:rw
+    - ./certs/elastic-certificates.p12:/usr/share/elasticsearch/config/elastic-certificates.p12:ro
     networks:
       elastic-network:
         aliases:
@@ -76,7 +77,8 @@ services:
         constraints:
           - "node.hostname==testswac2m1"
     volumes:
-    - volume_2:/usr/share/elasticsearch/data:rw    
+    - volume_2:/usr/share/elasticsearch/data:rw
+    - ./certs/elastic-certificates.p12:/usr/share/elasticsearch/config/elastic-certificates.p12:ro
     networks:
       elastic-network:
         aliases:
@@ -104,7 +106,8 @@ services:
         constraints:
           - "node.hostname==testswac2m1"
     volumes:
-    - volume_3:/usr/share/elasticsearch/data:rw    
+    - volume_3:/usr/share/elasticsearch/data:rw
+    - ./certs/elastic-certificates.p12:/usr/share/elasticsearch/config/elastic-certificates.p12:ro
     networks:
       elastic-network:
         aliases:
