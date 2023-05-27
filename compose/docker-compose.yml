@@ -74,7 +74,7 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.hostname==testswac2w1"
+          - "node.hostname==testswac2m1"
     volumes:
     - volume_2:/usr/share/elasticsearch/data:rw    
     networks:
@@ -102,7 +102,7 @@ services:
     deploy:
       placement:
         constraints:
-          - "node.hostname==testswac2w2"
+          - "node.hostname==testswac2m1"
     volumes:
     - volume_3:/usr/share/elasticsearch/data:rw    
     networks:
