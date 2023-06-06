@@ -1,0 +1,144 @@
+version: '3.9'
+services:
+  elastic_node_1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
+    hostname: elastic_node_1
+    env_file:
+      - ./common.env
+    environment:
+      - node.name=elastic_node_1
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=public
+        - traefik.constraint-label=traefik-public
+        # ELASTIC HTTP
+        - traefik.http.services.http_elastic.loadbalancer.server.scheme=http
+        - traefik.http.services.http_elastic.loadbalancer.server.port=9200
+        - traefik.http.services.http_elastic.loadbalancer.healthcheck.port=9200
+        - traefik.http.routers.https_elastic.service=http_elastic
+        - traefik.http.routers.https_elastic.rule=Host(`elasticcorp.apvtest.com`)
+        - traefik.http.routers.https_elastic.entrypoints=https
+        - traefik.http.routers.https_elastic.tls=true
+        - traefik.http.routers.http_elastic.service=http_elastic
+        - traefik.http.routers.http_elastic.rule=Host(`elasticcorp.apvtest.com`)
+        - traefik.http.routers.http_elastic.entrypoints=http
+    volumes:
+    - volume_1:/usr/share/elasticsearch/data:rw
+    networks:
+      - private
+    secrets:
+      - source: elastic-certificates.p12
+        target: /usr/share/elasticsearch/config/elastic-certificates.p12
+
+  elastic_node_2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
+    hostname: elastic_node_2
+    env_file:
+      - ./common.env
+    environment:
+      - node.name=elastic_node_2
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+    volumes:
+    - volume_2:/usr/share/elasticsearch/data:rw
+    networks:
+      - private
+    secrets:
+      - source: elastic-certificates.p12
+        target: /usr/share/elasticsearch/config/elastic-certificates.p12
+
+  elastic_node_3:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
+    hostname: elastic_node_3
+    env_file:
+      - ./common.env
+    environment:
+      - node.name=elastic_node_3
+      # - cluster.initial_master_nodes=elastic_node_1,elastic_node_2,elastic_node_3
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+    volumes:
+    - volume_3:/usr/share/elasticsearch/data:rw
+    networks:
+      - private
+    secrets:
+      - source: elastic-certificates.p12
+        target: /usr/share/elasticsearch/config/elastic-certificates.p12
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.7.1
+    env_file:
+      - ./kibana.env    
+    networks:
+      - private
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=public
+        - traefik.constraint-label=traefik-public
+        # KIBANA HTTP
+        - traefik.http.services.http_kibana.loadbalancer.server.scheme=http
+        - traefik.http.services.http_kibana.loadbalancer.server.port=5601
+        - traefik.http.services.http_kibana.loadbalancer.healthcheck.port=5601
+        - traefik.http.routers.https_kibana.service=http_kibana
+        - traefik.http.routers.https_kibana.rule=Host(`kibanacorp.apvtest.com`)
+        - traefik.http.routers.https_kibana.entrypoints=https
+        - traefik.http.routers.https_kibana.tls=true
+        - traefik.http.routers.http_kibana.service=http_kibana
+        - traefik.http.routers.http_kibana.rule=Host(`kibanacorp.apvtest.com`)
+        - traefik.http.routers.http_kibana.entrypoints=http
+
+networks:
+  private:
+    external: true
+
+volumes:
+  volume_1:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
+      device: ":/volume1/ELASTIC/test/data01"
+  volume_2:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
+      device: ":/volume1/ELASTIC/test/data02"
+  volume_3:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr=172.16.5.30,rw,proto=tcp,sec=sys,local_lock=none
+      device: ":/volume1/ELASTIC/test/data03"      
+
+secrets:
+  elastic-certificates.p12:
+    external: true
