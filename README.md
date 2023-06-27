@@ -10,6 +10,17 @@ Para poder realizar la implantación, se requiere:
 - tener permisos de ejecución para el comando `docker`
 - tener un archivo `.p12` con los certificados que elastic usará para las comunicaciones internodos. Si es necesario generar este archivo, se pude consultar la documentación de elastic para [generar el certificado](https://www.elastic.co/guide/en/elasticsearch/reference/current/security-basic-setup.html#generate-certificates)
 
+### Generar certificado
+   ```sh
+   mkdir certs
+   chmod 777 certs
+   docker run -it -v ${PWD}/certs:/usr/share/elasticsearch/config:rw  docker.elastic.co/elasticsearch/elasticsearch:8.7.1 bash
+   ./bin/elasticsearch-certutil ca
+   ./bin/elasticsearch-certutil cert --ca elastic-stack-ca.p12
+   cp elastic-* config/
+
+   ```
+
 ## Instalación (para 3 nodos)
 
 1. Desde el nodo manager, clonar este repositorio y acceder al directorio `ElasticSearch/TEST/compose/` creado:
