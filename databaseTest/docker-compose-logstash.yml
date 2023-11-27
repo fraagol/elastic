@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  logstash-demo:
+    build:
+      context: logstash/
+      args:
+        - ELK_VERSION=${ELK_VERSION}
+    ports:
+      - 9600:9600
+    hostname: logstash-demo
+    container_name: logstash-demo
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10k"
+        max-file: "10"
+    environment:
+      - "LS_JAVA_OPTS=-Xms512m -Xmx512m"
+      - CONNECTION_STRING=jdbc:sqlserver://192.168.2.8\LaneStatusService:1433
+      - USER=
+      - PASSWORD=
+    networks:
+      - elastic-demo-service-network
+
+# Networks to be created to facilitate communication between containers
+networks:
+  elastic-demo-service-network:
+    name: elastic-demo-service-network
