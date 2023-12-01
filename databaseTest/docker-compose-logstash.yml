@@ -16,7 +16,7 @@ services:
         max-file: "10"
     environment:
       - "LS_JAVA_OPTS=-Xms512m -Xmx512m"
-      - CONNECTION_STRING=jdbc:sqlserver://192.168.2.8\LaneStatusService:1433
+      - CONNECTION_STRING=jdbc:sqlserver://192.168.2.8\LaneStatusService:1433;encrypt=true;trustServerCertificate=true 
       - USER=
       - PASSWORD=
     networks:
